@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Library Books</title>
+</head>
+<body>
+    <h2>Library Books</h2>
+    <a href="/books/add">Add New Book</a>
+    <form action="/books/search" method="get">
+        <input type="text" name="keyword" placeholder="Search by title">
+        <button type="submit">Search</button>
+    </form>
+    <table border="1">
+        <tr>
+            <th>Title</th><th>Author</th><th>Category</th><th>Availability</th><th>Actions</th>
+        </tr>
+        <tr th:each="book : ${books}">
+            <td th:text="${book.title}">Title</td>
+            <td th:text="${book.author}">Author</td>
+            <td th:text="${book.category}">Category</td>
+            <td th:text="${book.availability} ? 'Available' : 'Not Available'">Availability</td>
+            <td>
+                <a th:href="@{'/books/edit/' + ${book.bookId}}">Edit</a> |
+                <a th:href="@{'/books/delete/' + ${book.bookId}}">Delete</a>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
